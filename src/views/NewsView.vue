@@ -1,20 +1,21 @@
 <template>
   <div>
     NEWS
-    <div v-for="news in newsList">{{news}}</div>
+    <p v-for="news in fetchedNews">
+      <a :href="news.url">{{news.title}}</a>
+      <small>{{news.time_ago}}{{news.user}}</small>
+    </p>
   </div>
 </template>
 
 <script>
-import { fetchNewsList } from "../api";
+import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      newsList: []
-    };
+  computed: {
+    ...mapGetters(["fetchedNews"])
   },
   created() {
-    fetchNewsList().then(response => (this.newsList = response.data));
+    this.$store.dispatch("FETCH_NEWS");
   }
 };
 </script>
