@@ -1,19 +1,14 @@
 <template>
-  <div>
-    NEWS
-    <p v-for="news in fetchedNews">
-      <a :href="news.url">{{news.title}}</a>
-      <small>
-        {{news.time_ago}} by
-        <router-link :to="`/user/${news.user}`">{{news.user}}</router-link>
-      </small>
-    </p>
-  </div>
+  <item-list :itemList="fetchedNews" topic="news"></item-list>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { ItemList } from "../components";
 export default {
+  components: {
+    ItemList
+  },
   computed: {
     ...mapGetters(["fetchedNews"])
   },

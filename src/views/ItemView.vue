@@ -3,7 +3,6 @@
     <div class="user-container">
       <section>
         <div class="user-description">
-          User
           <router-link :to="`/user/${questionItem.user}`">{{questionItem.user}}</router-link>
           <div>{{questionItem.time_ago}}</div>
         </div>
