@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ToolBar from "./components/ToolBar";
+import { ToolBar } from "./components";
 export default {
   components: {
     ToolBar
@@ -21,6 +21,15 @@ body {
   padding: 0;
   margin: 0;
 }
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.5s;
