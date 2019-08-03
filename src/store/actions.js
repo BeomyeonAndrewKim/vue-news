@@ -1,27 +1,6 @@
-import {
-  fetchAsksList,
-  fetchJobsList,
-  fetchNewsList,
-  fetchUserInfo,
-  fetchItemInfo
-} from "../api";
+import { fetchUserInfo, fetchItemInfo, fetchList } from "../api";
 
 export default {
-  FETCH_NEWS({ commit }) {
-    fetchNewsList().then(({ data }) => {
-      commit("SET_NEWS", data);
-    });
-  },
-  FETCH_JOBS({ commit }) {
-    fetchJobsList().then(({ data }) => {
-      commit("SET_JOBS", data);
-    });
-  },
-  FETCH_ASKS({ commit }) {
-    fetchAsksList().then(({ data }) => {
-      commit("SET_ASKS", data);
-    });
-  },
   FETCH_USER({ commit }, username) {
     fetchUserInfo(username).then(({ data }) => {
       commit("SET_USER", data);
@@ -30,6 +9,11 @@ export default {
   FETCH_ITEM({ commit }, itemId) {
     fetchItemInfo(itemId).then(({ data }) => {
       commit("SET_ITEM", data);
+    });
+  },
+  FETCH_LIST({ commit }, pageName) {
+    fetchList(pageName).then(({ data }) => {
+      commit("SET_LIST", data);
     });
   }
 };

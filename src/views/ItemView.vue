@@ -1,12 +1,10 @@
 <template>
   <div>
     <div class="user-container">
-      <section>
-        <div class="user-description">
-          <router-link :to="`/user/${questionItem.user}`">{{questionItem.user}}</router-link>
-          <div>{{questionItem.time_ago}}</div>
-        </div>
-      </section>
+      <user-profile :userInfo="questionItem">
+        <router-link slot="name" :to="`/user/${questionItem.user}`">{{questionItem.user}}</router-link>
+        <template slot="time">{{questionItem.time_ago}}</template>
+      </user-profile>
       <section>
         <h2>{{questionItem.title}}</h2>
         <p v-html="questionItem.content"></p>
@@ -16,7 +14,11 @@
 </template>
 
 <script>
+import { UserProfile } from "../components";
 export default {
+  components: {
+    UserProfile
+  },
   computed: {
     questionItem() {
       return this.$store.state.item;
