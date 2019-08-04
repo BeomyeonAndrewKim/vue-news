@@ -8,6 +8,12 @@ import { store } from "../store";
 
 Vue.use(VueRouter);
 
+const beforeEnterForListFetching = async (to, from, next) => {
+  bus.$emit("start:spinner");
+  await store.dispatch("FETCH_LIST", to.name);
+  next();
+}
+
 const router = new VueRouter({
   mode: "history",
   routes: [
@@ -19,28 +25,19 @@ const router = new VueRouter({
       path: "/news",
       name: "news",
       component: CreateListView("NewsView"),
-      beforeEnter: (to, from, next) => {
-        bus.$emit("start:spinner");
-        store.dispatch("FETCH_LIST", to.name).then(() => next());
-      }
+      beforeEnter: async (to,from,next) => await beforeEnterForListFetching(to, from ,next)
     },
     {
       path: "/ask",
       name: "ask",
       component: CreateListView("AskView"),
-      beforeEnter: (to, from, next) => {
-        bus.$emit("start:spinner");
-        store.dispatch("FETCH_LIST", to.name).then(() => next());
-      }
+      beforeEnter: async (to,from,next) => await beforeEnterForListFetching(to, from ,next)
     },
     {
       path: "/jobs",
       name: "jobs",
       component: CreateListView("JobsView"),
-      beforeEnter: (to, from, next) => {
-        bus.$emit("start:spinner");
-        store.dispatch("FETCH_LIST", to.name).then(() => next());
-      }
+      beforeEnter: async (to,from,next) => await beforeEnterForListFetching(to, from ,next)
     },
     {
       path: "/item/:itemId",

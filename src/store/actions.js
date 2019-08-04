@@ -1,20 +1,19 @@
 import { fetchUserInfo, fetchItemInfo, fetchList } from "../api";
 
 export default {
-  FETCH_USER({ commit }, username) {
-    return fetchUserInfo(username).then(({ data }) => {
-      commit("SET_USER", data);
-    });
+  async FETCH_USER({ commit }, username) {
+    const { data } = await fetchUserInfo(username);
+    commit("SET_USER", data);
+    return data
   },
-  FETCH_ITEM({ commit }, itemId) {
-    return fetchItemInfo(itemId).then(({ data }) => {
-      commit("SET_ITEM", data);
-    });
+  async FETCH_ITEM({ commit }, itemId) {
+    const { data } = await fetchItemInfo(itemId)
+    commit("SET_ITEM", data);
+    return data;
   },
-  FETCH_LIST({ commit }, pageName) {
-    return fetchList(pageName).then(({ data }) => {
-      commit("SET_LIST", data);
-      return data;
-    });
+  async FETCH_LIST({ commit }, pageName) {
+    const { data } = await fetchList(pageName);
+    commit("SET_LIST", data);
+    return data;
   }
 };
